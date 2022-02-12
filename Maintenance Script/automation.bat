@@ -42,6 +42,7 @@
     cls
 
 :: CHKDSK & Filter Event Viewer to export logs
+    echo "Running CHKDSK..."
     chkdsk c:
     Powershell -Command "& "Get-winevent -FilterHashTable @{logname='Application'; id='26212'}^|?{$_.providername -match 'Chkdsk'} ^| fl timecreated, message ^| out-file '%userprofile%\Desktop\MCA-Logs\chkdsk.txt'"
     cls
@@ -50,6 +51,7 @@
     cls
 
 :: DISM & Filter Event Viewer to export logs
+    echo "Running DISM"
     DISM /Online /Cleanup-Image /ScanHealth /NoRestart
     Powershell -Command "& "Get-winevent -FilterHashTable @{logname='Setup'; id='1014'}^|?{$_.providername -match 'Microsoft-Windows-Servicing'} ^| fl timecreated, message ^| out-file '%userprofile%\Desktop\MCA-Logs\DISM.txt'"
     cls
@@ -58,6 +60,7 @@
     cls
 
 :: SFC & Export logs
+    echo "Running SFC..."
     sfc /scannow
     findstr /c:"[SR]" %windir%\Logs\CBS\CBS.log >"%userprofile%\Desktop\MCA-Logs\sfc-scannow.txt"
     cls
@@ -68,9 +71,18 @@
 :: Runs CCleaner off USB drive using last saved settings
     echo Verify custom clean settings on portable CCleaner version are correctly set before proceeding!
     pause
+    pause
     "%~dp0\CCleaner Portable\CCleaner64.exe" /auto
     cls
     echo CCleaner custom clean completed.
+    pause
+    cls
+
+:: Exports Group Policy
+    echo "Running GPO Report..."
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command &" {Add-WindowsCapability -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0 –online; Get-GPOReport -All -ReportType Html -Path "%userprofile%\Desktop\MCA-Logs\GroupPolicy.html"}
+    cls
+    echo "GPO Report exported."
     pause
     cls
 
