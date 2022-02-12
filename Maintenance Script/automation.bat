@@ -42,7 +42,7 @@
     cls
 
 :: CHKDSK & Filter Event Viewer to export logs
-    echo "Running CHKDSK..."
+    echo Running CHKDSK...
     chkdsk c:
     Powershell -Command "& "Get-winevent -FilterHashTable @{logname='Application'; id='26212'}^|?{$_.providername -match 'Chkdsk'} ^| fl timecreated, message ^| out-file '%userprofile%\Desktop\MCA-Logs\chkdsk.txt'"
     cls
@@ -51,7 +51,7 @@
     cls
 
 :: DISM & Filter Event Viewer to export logs
-    echo "Running DISM"
+    echo Running DISM
     DISM /Online /Cleanup-Image /ScanHealth /NoRestart
     Powershell -Command "& "Get-winevent -FilterHashTable @{logname='Setup'; id='1014'}^|?{$_.providername -match 'Microsoft-Windows-Servicing'} ^| fl timecreated, message ^| out-file '%userprofile%\Desktop\MCA-Logs\DISM.txt'"
     cls
@@ -60,7 +60,7 @@
     cls
 
 :: SFC & Export logs
-    echo "Running SFC..."
+    echo Running SFC...
     sfc /scannow
     findstr /c:"[SR]" %windir%\Logs\CBS\CBS.log >"%userprofile%\Desktop\MCA-Logs\sfc-scannow.txt"
     cls
