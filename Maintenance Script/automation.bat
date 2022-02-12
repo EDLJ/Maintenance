@@ -80,7 +80,7 @@
 
 :: Exports Group Policy
     echo "Running GPO Report..."
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command &" {Add-WindowsCapability -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0 –online; Get-GPOReport -All -ReportType Html -Path "%userprofile%\Desktop\MCA-Logs\GroupPolicy.html"}
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command &" {Add-WindowsCapability -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0 –online; Get-GPOReport -All -ReportType Html -Path %userprofile%\Desktop\MCA-Logs\GroupPolicy.html}
     cls
     echo "GPO Report exported."
     pause
