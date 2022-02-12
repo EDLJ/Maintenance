@@ -3,7 +3,7 @@
 Managed by Edward Laverty
 
 # INSTRUCTIONS
-1.) Download 'Maintenance Script' folder.<br>
+1.) Download zip file and extract files.<br>
 2.) Run automation.bat<br>
 3.) This script requires user prompts to continue to the next process. Babysit script.<br>
 4.) Logs are exported to a folder named 'MCA-Logs' on the current user profile's desktop.<br>
