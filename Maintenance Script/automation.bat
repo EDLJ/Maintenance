@@ -11,7 +11,7 @@
     mkdir "%userprofile%\Desktop\MCA-Logs"
 
 :: Generate and Export System Information
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {get-computerinfo -property * | out-file "%userprofile%\Desktop\MCA-Logs\SystemInfo.txt"}
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {get-computerinfo -property * | out-file '%userprofile%\Desktop\MCA-Logs\SystemInfo.txt'}"
     cls
     echo System Info exported.
     pause
@@ -89,7 +89,7 @@
     echo Final Step in Script - Installs All Windows Updates and Gives Option of Rebooting
     echo Exit script now if you prefer to skip this step.
     pause
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Install-Module -Name PSWindowsUpdate; Get-WindowsUpdate -AcceptAll -Install; Get-WUHistory | out-file -FilePath %userprofile%\Desktop\MCA-Logs\WindowsUpdateHistory.txt}
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Install-Module -Name PSWindowsUpdate; Get-WindowsUpdate -AcceptAll -Install; Get-WUHistory | out-file -FilePath %userprofile%\Desktop\MCA-Logs\WindowsUpdateHistory.txt}"
     cls
     echo Windows Updates have been downloaded and installed. Log exported.
     pause
