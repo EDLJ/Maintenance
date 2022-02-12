@@ -79,10 +79,10 @@
     cls
 
 :: Exports Group Policy
-    echo "Running GPO Report..."
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command &" {Add-WindowsCapability -Online -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0; Get-GPOReport -All -ReportType Html -Path %userprofile%\Desktop\MCA-Logs\GroupPolicy.html}
-    cls
-    echo "GPO Report exported."
+    echo Running GPO Report...
+    DISM.exe /online /add-capability /capabilityname:Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command &" {$output = try{Get-GPOReport -All -ReportType HTML -Path "C:\Users\%userprofile%\Desktop\MCA-Logs\GPOReport.html" *>&1}catch{$_}; echo $output}"
+    echo GPO Report exported.
     pause
     cls
 
