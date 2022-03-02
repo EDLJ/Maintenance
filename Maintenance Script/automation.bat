@@ -15,6 +15,9 @@
     cls
     echo System Info exported.
 
+:: Export CPU-Z Log
+    "%~dp0\CPU-Z\cpuz_x64.exe" -html="%userprofile%\Desktop\Maintenance Logs\CPU-Z"
+
 :: Export IPCONFIG
     ipconfig /all > "%userprofile%\Desktop\Maintenance Logs\IPCONFIG.txt"
     cls
