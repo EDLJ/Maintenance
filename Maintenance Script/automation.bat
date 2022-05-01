@@ -17,11 +17,14 @@
 
 :: Export CPU-Z Log
     "%~dp0\CPU-Z\cpuz_x64.exe" -html=%userprofile%\Desktop\Maintenance-Logs\CPU-Z
-
-:: Export IPCONFIG
-    ipconfig /all > "%userprofile%\Desktop\Maintenance-Logs\IPCONFIG.txt"
     cls
-    echo IPConfig exported.
+    echo CPU-Z report exported.
+
+:: Network Information (Useful for troubleshooting WiFi issues)
+    netsh wlan show wlanreport
+    move /y "%ProgramData%\Microsoft\Windows\wlanreport\wlan-report-latest.html" "%userprofile%\Desktop\Maintenance-Logs\wlan-report-latest.html"
+    cls
+    echo Network Analysis completed.
 
 :: Install/Export Log/Uninstall CrystalDiskInfo
     echo Silently installing CrystalDiskInfo and exporting log. Please select Yes when the prompt to uninstall appears.
@@ -73,4 +76,5 @@
     echo Final Step in Script - Installs All Windows Updates and Gives Option of Rebooting
     Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Install-Module -Name PSWindowsUpdate; Get-WindowsUpdate -AcceptAll -Install; Get-WUHistory | out-file -FilePath %userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt}"
 
-exit
+:: Checks if Windows Update Logs have been generated. If so, will exit.
+    IF EXIST "%userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt" EXIT
