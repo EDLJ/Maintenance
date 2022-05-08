@@ -20,7 +20,7 @@
     cls
     echo CPU-Z report exported.
 
-:: Network Information (Useful for troubleshooting WiFi issues)
+:: Network Information
     netsh wlan show wlanreport
     move /y "%ProgramData%\Microsoft\Windows\wlanreport\wlan-report-latest.html" "%userprofile%\Desktop\Maintenance-Logs\wlan-report-latest.html"
     cls
@@ -73,8 +73,8 @@
     echo GPO Report exported.
 
 :: Check/Download/Install Windows Updates
-    echo Final Step in Script - Installs All Windows Updates and Gives Option of Rebooting
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Install-Module -Name PSWindowsUpdate; Get-WindowsUpdate -AcceptAll -Install; Get-WUHistory | out-file -FilePath %userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt}"
+::    echo Final Step in Script - Installs All Windows Updates and Gives Option of Rebooting
+::    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Install-Module -Name PSWindowsUpdate; Get-WindowsUpdate -AcceptAll -Install; Get-WUHistory | out-file -FilePath %userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt}"
 
 :: Checks if Windows Update Logs have been generated. If so, will exit.
-    IF EXIST "%userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt" EXIT
+::    IF EXIST "%userprofile%\Desktop\Maintenance-Logs\WindowsUpdateHistory.txt" EXIT
