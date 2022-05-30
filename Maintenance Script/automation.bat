@@ -60,6 +60,8 @@ setlocal
     echo Running GPO Report...
     gpresult /H "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\GroupPolicy-Report.html"
     echo GPO Report exported.
+:: Exports Windows/Office/SQL/IE/Exchange Product Keys
+produkey.exe /WindowsKeys 1 /OfficeKeys 1 /IEKeys 1 /SQLKeys 1 /ExchangeKeys 1 /ExtractEdition 1 /sjson "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\ProduKey.json"
 :: Compresses logs folder using 7Zip
     7za.exe a -tzip ".\%YYYYMMDD%\%USERNAME%.zip" "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\*"
 ::  Removes old folder on user desktop
