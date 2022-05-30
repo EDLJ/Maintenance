@@ -7,8 +7,9 @@
 :: Create Restore Point
     PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -NoExit -Command "Checkpoint-Computer -Description "MaintenanceVisit" -RestorePointType "MODIFY_SETTINGS"; " ' " -Verb RunAs; exit}"
 
-:: Set variable for current date
+:: Set variable for current date and hostname
     set YYYYMMDD=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%
+    set computerName=hostname
 
 :: Create Folder on Current Desktop for Exported Logs
     mkdir "%userprofile%\Desktop\%YYYYMMDD%-MaintenanceLogs"
@@ -84,6 +85,12 @@
     echo Running GPO Report...
     gpresult /H "%userprofile%\Desktop\%YYYYMMDD%-MaintenanceLogs\GroupPolicy-Report.html"
     echo GPO Report exported.
+
+:: Compresses logs folder using 7Zip
+    7za.exe a -tzip ".\%YYYYMMDD%.zip" "%userprofile%\Desktop\%YYYYMMDD%-MaintenanceLogs\*"
+
+::  Removes old folder on user desktop
+    rmdir /Q /S "%userprofile%\Desktop\%YYYYMMDD%-MaintenanceLogs"
 
 :: Check/Download/Install Windows Updates
 ::    echo Final Step in Script - Installs All Windows Updates and Gives Option of Rebooting
