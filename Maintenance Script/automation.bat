@@ -26,7 +26,7 @@ setlocal
     move /y "%ProgramData%\Microsoft\Windows\wlanreport\wlan-report-latest.html" "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\wlan-report-latest.html"
     echo Network Analysis completed.
 :: Speedtest
-    "%~dp0\speedtest.exe" > "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\SpeedTest.txt"
+    "%~dp0\speedtest.exe" --accept-license > "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\SpeedTest.txt"
 :: Install/Export Log/Uninstall CrystalDiskInfo
     echo Silently installing CrystalDiskInfo and exporting log. Please select Yes when the prompt to uninstall appears.
     "%~dp0\crystalDiskInstaller.exe" /VERYSILENT /NORESTART /MERGETASKS=!desktopicon64 /LOG="%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\CrystalDiskInfo-Install.log"

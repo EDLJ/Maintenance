@@ -12,7 +12,3 @@ $ram = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity
 $ram | ConvertTo-Json | Add-Content "~/Desktop\$YYYYMMDD-MaintenanceLogs\MaintenanceReportData.json"
 $drivespace = Get-CimInstance win32_logicaldisk | Where-Object caption -eq "C:" | foreach-object {Write-Output " $($_.caption) $('{0:N2}' -f ($_.Size/1gb)) GB total, $('{0:N2}' -f ($_.FreeSpace/1gb)) GB free "}
 $drivespace | ConvertTo-Json | Add-Content "~/Desktop\$YYYYMMDD-MaintenanceLogs\MaintenanceReportData.json"
-
-
-
-
