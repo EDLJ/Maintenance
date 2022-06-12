@@ -10,6 +10,9 @@ setlocal
     set computerName=hostname
 :: Create Folder on Current Desktop for Exported Logs
     mkdir "%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs"
+:: Removes ProductKey tool from Windows Defender quarantined list and exports log of what else is in there
+    "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -restore -name "HackTool:Win32/ProductKey"
+    "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -restore -listall
 :: Generate and Export Fully-Detailed System Information
     Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {get-computerinfo -property * | out-file '%USERPROFILE%\Desktop\%YYYYMMDD%-MaintenanceLogs\SystemInfo.txt'}"
     echo System Info exported.
