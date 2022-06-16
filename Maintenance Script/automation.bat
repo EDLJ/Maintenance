@@ -62,7 +62,7 @@ setlocal
 :: Exports Windows/Office/SQL/IE/Exchange Product Keys
     produkey.exe /WindowsKeys 1 /OfficeKeys 1 /IEKeys 1 /SQLKeys 1 /ExchangeKeys 1 /ExtractEdition 1 /sjson "%~dp0\%YYYYMMDD%-Logs\ProduKey.json"
 :: Windows Updates - Microsoft Updates only
-    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; Install-Module -Name PSWindowsUpdate; Install-WindowsUpdate -MicrosoftUpdate -AcceptAll; Get-WUHistory | out-file -FilePath %~dp0\%YYYYMMDD%-Logs\WindowsUpdateHistory.txt}"
+    Powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; Install-Module -Name PSWindowsUpdate; Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot; Get-WUHistory | out-file -FilePath %~dp0\%YYYYMMDD%-Logs\WindowsUpdateHistory.txt}"
 :: Compresses log folder using 7Zip
     7za.exe a -tzip ".\%YYYYMMDD%\%USERNAME%.zip" "%~dp0\%YYYYMMDD%-Logs\*"
 ::  Removes log folder
