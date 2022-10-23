@@ -4,6 +4,8 @@ $model = Get-WmiObject Win32_ComputerSystem | Select-Object Manufacturer, Model
 $model | ConvertTo-Json | Set-Content ".\$YYYYMMDD-Logs\MaintenanceReportData.json"
 $hostname = Get-WmiObject Win32_ComputerSystem | Select-Object Name
 $hostname | ConvertTo-Json | Add-Content ".\$YYYYMMDD-Logs\MaintenanceReportData.json"
+$processor = Get-WmiObject Win32_Processor | Select-Object Name, SocketDesignation
+$processor | ConvertTo-Json | Add-Content ".\$YYYYMMDD-Logs\MaintenanceReportData.json"
 $serial = Get-WmiObject Win32_bios | Select-Object SerialNumber
 $serial | ConvertTo-Json | Add-Content ".\$YYYYMMDD-Logs\MaintenanceReportData.json"
 $os = (Get-WmiObject -class Win32_OperatingSystem).Caption
